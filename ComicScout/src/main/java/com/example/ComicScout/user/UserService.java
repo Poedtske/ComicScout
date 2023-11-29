@@ -1,5 +1,6 @@
 package com.example.ComicScout.user;
 
+import com.example.ComicScout.serie.Serie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +28,14 @@ public class UserService {
         userRepository.save(u);
     }
 
+    public User editBookmarks(User u) {
+        //Optional<User> userOptional= serieRepository.findUserByEmail(u.getEmail());
+        //if(userOptional.isPresent()){
+        //    throw new IllegalStateException("email taken");
+        //}
+        return userRepository.save(u);
+    }
+
     public void deleteUser(Long userId) {
         boolean exists=userRepository.existsById(userId);
         if(!exists){
@@ -51,5 +60,9 @@ public class UserService {
             }
             u.setEmail(email);
         }
+    }
+
+    public User getUser(Long userId){
+        return userRepository.findUserById(userId);
     }
 }

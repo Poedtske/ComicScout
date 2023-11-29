@@ -1,7 +1,12 @@
 package com.example.ComicScout.user;
 
 
+import com.example.ComicScout.serie.Serie;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Users")
@@ -22,6 +27,18 @@ public class User {
     private Long id;
     private String userName;
     private String email;
+
+    @ManyToMany()
+    @JoinTable(
+            name = "bookmarks",
+            joinColumns =@JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "serie_id")
+    )
+    private Set<Serie> bookmarks= new HashSet<>();
+
+    public Set<Serie> getBookmarks() {
+        return bookmarks;
+    }
 
     public User(){}
 
@@ -62,4 +79,8 @@ public class User {
                 ", email='" + email + '\'' +
                 '}';
     }
+    public void addBookmark(Serie s) {
+        bookmarks.add(s);
+    }
+
 }
