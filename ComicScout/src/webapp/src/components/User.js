@@ -14,7 +14,7 @@ export default function User() {
         e.preventDefault();
         const user={userName,email}
         console.log(user);
-        fetch("http://localhost:8080/ComicScout",{
+        fetch("http://localhost:8080/Users",{
             method:"POST",
             headers:{"Content-Type":"application/json"},
             body:JSON.stringify(user)
