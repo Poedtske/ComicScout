@@ -50,7 +50,6 @@ export default function User() {
         <Paper elevation={3} style={paperStyle}>
             <h1 style={{color:"blue"}}><u>Add User</u></h1>
             <form className="User">
-                <img src='..\images\youngWoman.jpeg' height={200}width={200} alt='foto'></img>
                 <TextField className='addUser' id="userName" label="User Name" variant="outlined" fullWidth
                 value={userName}
                 onChange={(e)=>setName(e.target.value)} />
@@ -67,7 +66,7 @@ export default function User() {
                     Id:{user.id} <br/>
                     Name:{user.userName}<br/>
                     Email:{user.email}
-                    <a href="https://www.kfdemoedigevrienden.be/" target='_blank'><img src={require('../images/youngWoman.jpeg')} height={200}width={150} alt='foto'></img></a>
+                    <a href="https://www.kfdemoedigevrienden.be/" target='_blank'><img src={'https://flamecomics.com/wp-content/uploads/2021/11/EXACOVER-242x350.jpg'} height={200}width={150} alt='foto'></img></a>
                 </Paper>
             ))}
         </Paper>
