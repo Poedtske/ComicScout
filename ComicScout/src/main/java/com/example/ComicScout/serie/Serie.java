@@ -27,6 +27,7 @@ public class Serie {
     private Long id;
     private String name;
     private String description;
+    private String cover;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "bookmarks")
@@ -42,9 +43,10 @@ public class Serie {
 
     public Serie(){}
 
-    public Serie(String name, String description) {
+    public Serie(String name, String description, String cover) {
         this.name = name;
         this.description = description;
+        this.cover=cover;
     }
 
     public Long getId() {
@@ -67,7 +69,13 @@ public class Serie {
         this.description = description;
     }
 
+    public String getCover() {
+        return cover;
+    }
 
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
 
     @Override
     public String toString() {
@@ -75,6 +83,7 @@ public class Serie {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", cover='" + cover + '\'' +
                 '}';
     }
 
