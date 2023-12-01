@@ -7,19 +7,13 @@ import com.example.ComicScout.chapter.ChapterService;
 import com.example.ComicScout.serie.Serie;
 import com.example.ComicScout.serie.SerieRepository;
 import com.example.ComicScout.serie.SerieService;
-import com.example.ComicScout.user.UserRepository;
-import jakarta.persistence.Entity;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -152,7 +146,7 @@ public class Scraper {
                     Serie s= new Serie(title,"",imgS);
 
                     for (int y=1;y<=getNrOfChapters(ticker);y++){
-                        Chapter c=new Chapter(s.getName()+":Chapter"+y,chapter+"chapter-"+y+"/");
+                        Chapter c=new Chapter(s.getSerieName()+":Chapter"+y,chapter+"chapter-"+y+"/");
                         //c.addSerie(s);
                         cRepository.save(c);
                         s.addChapter(c);

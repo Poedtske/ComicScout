@@ -4,8 +4,6 @@ import com.example.ComicScout.serie.Serie;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-import java.util.Set;
-
 @Entity
 @Table(name = "chapters")
 public class Chapter {
@@ -46,11 +44,11 @@ public class Chapter {
         return id;
     }
 
-    public String getName() {
+    public String getChapterName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setChapterName(String name) {
         this.name = name;
     }
 

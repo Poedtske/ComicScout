@@ -42,6 +42,16 @@ public class SerieController {
         serieService.deleteSerie(serieId);
     }
 
+    @PutMapping(path ="{serieId}")
+    public void updateSerie(
+            @PathVariable("serieId") Long serieId,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String description,
+            @RequestParam(required = false) String cover
+    ){
+        serieService.updateSerie(serieId,name,description,cover);
+    }
+
 /*@PutMapping(path ="{serieId}/Chapters/{chapterId}")
 public Serie addChapterToSerie(
         @PathVariable Long serieId,

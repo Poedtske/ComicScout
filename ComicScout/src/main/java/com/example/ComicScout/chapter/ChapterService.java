@@ -45,4 +45,21 @@ public class ChapterService {
         return chapterRepository.save(chapter);
     }
 
+    //entity goes in to managed state, this makes it so we don't need to do sql syntax
+    @Transactional
+    public void updateChapter(Long chapterId, String name, String path) {
+        Chapter c = chapterRepository.findById(chapterId).orElseThrow(() -> new IllegalStateException("chapter with id " + chapterId + "does not exist"));
+
+        if (name != null && name.length() > 0 && !Objects.equals(c.getChapterName(), name)) {
+            c.setChapterName(name);
+        }
+
+        if (path != null && path.length() > 0 && !Objects.equals(c.getPath(), path)) {
+            Optional<Chapter> chapterOptional = chapterRepository.findChapterByPath(path);
+            if (chapterOptional.isPresent()) {
+                throw new IllegalStateException("chapter taken");
+            }
+            c.setPath(path);
+        }
+    }
 }

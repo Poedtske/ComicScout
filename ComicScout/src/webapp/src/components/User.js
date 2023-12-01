@@ -109,7 +109,7 @@ export default function User() {
             {series.map(serie=>(
                 <Paper elevation={6} style={{margin:"10px", padding:"15px",textAlign:"left"}} key={serie.id}>
                     Id:{serie.id} <br/>
-                    Name:{serie.name}<br/>
+                    Name:{serie.serieName}<br/>
                     Description:{serie.description}<br/>
                     <a href="https://www.kfdemoedigevrienden.be/" target='_blank'><img src={serie.cover} height={200}width={150} alt='foto'></img></a>
                     <form className="bookmark">
@@ -124,7 +124,7 @@ export default function User() {
             {chapters.map(chapter=>(
                 <Paper elevation={6} style={{margin:"10px", padding:"15px",textAlign:"left"}} key={chapter.id}>
                     Id:{chapter.id} <br/>
-                    <a href={chapter.path} target=''>{chapter.name}<br/></a>
+                    <a href={chapter.path} target=''>{chapter.chapterName}<br/></a>
                 </Paper>
             ))}
         </Paper>

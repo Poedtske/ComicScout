@@ -5,7 +5,6 @@ import com.example.ComicScout.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -53,11 +52,11 @@ public class Serie {
         return id;
     }
 
-    public String getName() {
+    public String getSerieName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setSerieName(String name) {
         this.name = name;
     }
 

@@ -41,6 +41,15 @@ public class ChapterController {
         chapterService.deleteChapter(chapterId);
     }
 
+    @PutMapping(path ="{chapterId}")
+    public void updateChapter(
+            @PathVariable("chapterId") Long chapterId,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String path
+    ){
+        chapterService.updateChapter(chapterId,name,path);
+    }
+
     @PutMapping(path ="{chapterId}/Series/{serieId}")
     public Chapter addChapterToSerie(
             @PathVariable Long chapterId,
