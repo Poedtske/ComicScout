@@ -26,7 +26,7 @@ public class ChapterController {
         this.chapterService = chapterService;
     }
 
-    @GetMapping
+    @GetMapping(path = "/getAll")
     public List<Chapter>getChapters(){
         return chapterService.getChapters();
     }
@@ -39,6 +39,15 @@ public class ChapterController {
     @DeleteMapping(path ="{chapterId}")
     public void deleteChapter(@PathVariable("chapterId") Long chapterId){
         chapterService.deleteChapter(chapterId);
+    }
+
+    @PutMapping(path ="{chapterId}")
+    public void updateChapter(
+            @PathVariable("chapterId") Long chapterId,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String path
+    ){
+        chapterService.updateChapter(chapterId,name,path);
     }
 
     @PutMapping(path ="{chapterId}/Series/{serieId}")

@@ -5,7 +5,6 @@ import com.example.ComicScout.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-import java.awt.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,6 +26,7 @@ public class Serie {
     private Long id;
     private String name;
     private String description;
+    private String cover;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "bookmarks")
@@ -42,20 +42,21 @@ public class Serie {
 
     public Serie(){}
 
-    public Serie(String name, String description) {
+    public Serie(String name, String description, String cover) {
         this.name = name;
         this.description = description;
+        this.cover=cover;
     }
 
     public Long getId() {
         return id;
     }
 
-    public String getName() {
+    public String getSerieName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setSerieName(String name) {
         this.name = name;
     }
 
@@ -67,7 +68,13 @@ public class Serie {
         this.description = description;
     }
 
+    public String getCover() {
+        return cover;
+    }
 
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
 
     @Override
     public String toString() {
@@ -75,6 +82,7 @@ public class Serie {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", cover='" + cover + '\'' +
                 '}';
     }
 

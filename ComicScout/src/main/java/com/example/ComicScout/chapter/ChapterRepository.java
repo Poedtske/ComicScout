@@ -14,4 +14,8 @@ public interface ChapterRepository extends JpaRepository<Chapter, Long> {
 
     @Query("SELECT c FROM Chapter c WHERE c.id= ?1")
     Chapter findChapterById(long id);
+
+    @Query("SELECT c FROM Chapter c WHERE c.path= ?1")
+    Optional<Chapter> findChapterByPath(String path);
+
 }

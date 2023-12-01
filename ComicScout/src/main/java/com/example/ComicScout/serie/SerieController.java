@@ -27,7 +27,7 @@ public class SerieController {
 
 
 
-    @GetMapping
+    @GetMapping(path = "/getAll")
     public List<Serie>getSeries(){
         return serieService.getSeries();
     }
@@ -40,6 +40,16 @@ public class SerieController {
     @DeleteMapping(path ="{serieId}")
     public void deleteSerie(@PathVariable("serieId") Long serieId){
         serieService.deleteSerie(serieId);
+    }
+
+    @PutMapping(path ="{serieId}")
+    public void updateSerie(
+            @PathVariable("serieId") Long serieId,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String description,
+            @RequestParam(required = false) String cover
+    ){
+        serieService.updateSerie(serieId,name,description,cover);
     }
 
 /*@PutMapping(path ="{serieId}/Chapters/{chapterId}")

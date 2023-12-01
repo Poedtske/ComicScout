@@ -1,10 +1,13 @@
 package com.example.ComicScout.serie;
 
 import com.example.ComicScout.user.User;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 //add business functionalities
 @Service
@@ -18,14 +21,15 @@ public class SerieService {
     public List<Serie>getSeries(){return serieRepository.findAll();}
 
     public Serie editSerie(Serie s) {
-        //Optional<User> userOptional= serieRepository.findUserByEmail(u.getEmail());
-        //if(userOptional.isPresent()){
-        //    throw new IllegalStateException("email taken");
-        //}
+
         return serieRepository.save(s);
     }
 
     public void addNewSerie (Serie s){
+        Optional<Serie> serieOptional= serieRepository.findSerieByName(s.getSerieName());
+        if(serieOptional.isPresent()){
+            throw new IllegalStateException("serie is already present");
+        }
         serieRepository.save(s);
     }
 
@@ -33,13 +37,7 @@ public class SerieService {
         return serieRepository.findSerieById(serieId);
     }
 
-    public Serie editChapters(Serie s) {
-        //Optional<User> userOptional= serieRepository.findUserByEmail(u.getEmail());
-        //if(userOptional.isPresent()){
-        //    throw new IllegalStateException("email taken");
-        //}
-        return serieRepository.save(s);
-    }
+
 
     public void deleteSerie(Long serieId) {
         boolean exists= serieRepository.existsById(serieId);
@@ -50,14 +48,24 @@ public class SerieService {
     }
 
     //entity goes in to managed state, this makes it so we don't need to do sql syntax
-    /*@Transactional
-    public void updateSerie(Long serieId, String name, String path) {
-        Serie c = serieRepository.findById(userId).orElseThrow(() -> new IllegalStateException("user with id " + userId + "does not exist"));
+    @Transactional
+    public void updateSerie(Long serieId, String name, String description, String cover) {
+        Serie s = serieRepository.findById(serieId).orElseThrow(() -> new IllegalStateException("serie with id " + serieId + "does not exist"));
 
-        if (name != null && name.length() > 0 && !Objects.equals(c.getSerieName(), name)) {
-            c.setSerieName(name);
+        if (name != null && name.length() > 0 && !Objects.equals(s.getSerieName(), name)) {
+            s.setSerieName(name);
+        }
+
+        if (description != null && description.length() > 0 && !Objects.equals(s.getDescription(), description)) {
+
+            s.setDescription(description);
+        }
+
+        if (cover != null && cover.length() > 0 && !Objects.equals(s.getCover(), cover)) {
+
+            s.setCover(cover);
         }
 
 
-    }*/
+    }
 }

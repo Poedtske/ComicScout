@@ -12,6 +12,8 @@ export default function User() {
     const[userName,setName]=useState('');
     const[email,setEmail]=useState('');
     const[users, setUsers]=useState([]);
+    const[series, setSeries]=useState([]);
+    const[chapters,setChapters]=useState([]);
     
     
     const handleClick=(e)=>{
@@ -27,11 +29,44 @@ export default function User() {
         })
     }
 
+    const bookmarkClick=(e)=>{
+        e.preventDefault();
+        let userId=1;
+        let serieId=e.target.value;
+        
+
+        const ids={userId,serieId}
+        //console.log(userId+" "+serieId);
+        fetch(`http://localhost:8080/Users/${userId}/Series/${serieId}`,{
+            method:"PUT",
+            headers:{"Content-Type":"application/json"},
+            body:JSON.stringify(ids)
+        }).then(()=>{
+            console.log("Bookmarked");
+        })
+    }
+
     useEffect(()=>{
         fetch("http://localhost:8080/Users/getAll")
         .then(res=>res.json())
         .then((result)=>{
             setUsers(result);
+            console.log(result);
+        }
+        )
+
+        fetch("http://localhost:8080/Series/getAll")
+        .then(res=>res.json())
+        .then((result)=>{
+            setSeries(result);
+            console.log(result);
+        }
+        )
+
+        fetch("http://localhost:8080/Chapters/getAll")
+        .then(res=>res.json())
+        .then((result)=>{
+            setChapters(result);
             console.log(result);
         }
         )
@@ -66,7 +101,30 @@ export default function User() {
                     Id:{user.id} <br/>
                     Name:{user.userName}<br/>
                     Email:{user.email}
-                    <a href="https://www.kfdemoedigevrienden.be/" target='_blank'><img src={'https://flamecomics.com/wp-content/uploads/2021/11/EXACOVER-242x350.jpg'} height={200}width={150} alt='foto'></img></a>
+                </Paper>
+            ))}
+        </Paper>
+        <h1>Series</h1>
+        <Paper elevation={3} style={paperStyle}>
+            {series.map(serie=>(
+                <Paper elevation={6} style={{margin:"10px", padding:"15px",textAlign:"left"}} key={serie.id}>
+                    Id:{serie.id} <br/>
+                    Name:{serie.serieName}<br/>
+                    Description:{serie.description}<br/>
+                    <a href="https://www.kfdemoedigevrienden.be/" target='_blank'><img src={serie.cover} height={200}width={150} alt='foto'></img></a>
+                    <form className="bookmark">
+                        
+                        <Button className='addBookmark' variant="contained" value={serie.id} onClick={bookmarkClick}>Bookmark</Button>
+                    </form>
+                </Paper>
+            ))}
+        </Paper>
+        <h1>Chapters</h1>
+        <Paper elevation={3} style={paperStyle}>
+            {chapters.map(chapter=>(
+                <Paper elevation={6} style={{margin:"10px", padding:"15px",textAlign:"left"}} key={chapter.id}>
+                    Id:{chapter.id} <br/>
+                    <a href={chapter.path} target=''>{chapter.chapterName}<br/></a>
                 </Paper>
             ))}
         </Paper>
