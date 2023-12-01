@@ -25,7 +25,7 @@ public class Chapter {
 
 
     @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "serie_id",referencedColumnName = "id")
     private Serie serie;
 

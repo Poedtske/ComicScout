@@ -102,7 +102,7 @@ public class Scraper {
                     String chapter= "https://flamecomics.com/"+title+"-";
 
                     Serie s= new Serie(title,"",imgS);
-
+                    serieService.addNewSerie(s);
                     for (int y=1;y<=getNrOfChapters(ticker);y++){
                         Chapter c=new Chapter("Chapter "+y,chapter+"chapter-"+y+"/");
                         c.addSerie(s);
@@ -110,7 +110,7 @@ public class Scraper {
                         s.addChapter(c);
                         //System.out.println(chapter+"chapter-"+y+"/");
                     }
-                    serieService.addNewSerie(s);
+
 
 
                     name=title;

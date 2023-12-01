@@ -44,8 +44,8 @@ public class Configuration {
             Scraper flameComics=new Scraper("https://flamecomics.com/series/?page=1",cRepository,sRepository);
             try{
                 //tries to save on to the database!doesn't work!
-                flameComics.getSerieRepository();
-                //flameComics.getSerieService();
+                //flameComics.getSerieRepository();
+                flameComics.getSerieService();
 
                 //Just prints out all the chapters
                 //flameComics.getSerie();
