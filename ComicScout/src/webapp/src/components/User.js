@@ -13,7 +13,8 @@ export default function User() {
     const[email,setEmail]=useState('');
     const[users, setUsers]=useState([]);
     const[series, setSeries]=useState([]);
-    const[chapters,setChapters]=useState([]);
+    //const[chapters,setChapters]=useState([]);
+    // const[chapters, setChapters]=useState([])
     
     
     const handleClick=(e)=>{
@@ -63,13 +64,13 @@ export default function User() {
         }
         )
 
-        fetch("http://localhost:8080/Chapters/getAll")
-        .then(res=>res.json())
-        .then((result)=>{
-            setChapters(result);
-            console.log(result);
-        }
-        )
+        // fetch("http://localhost:8080/Chapters/getAll")
+        // .then(res=>res.json())
+        // .then((result)=>{
+        //     setChapters(result);
+        //     console.log(result);
+        // }
+        // )
     },[])
 
     return (
@@ -100,26 +101,47 @@ export default function User() {
                 <Paper elevation={6} style={{margin:"10px", padding:"15px",textAlign:"left"}} key={user.id}>
                     Id:{user.id} <br/>
                     Name:{user.userName}<br/>
-                    Email:{user.email}
+                    Email:{user.email} <br/>
+                    Bookmarks:
+                    {user.bookmarks
+                    .sort((a, b) => a.id-(b.id))
+                    .map((bookmark) => (
+                        <p>{bookmark.serieName}</p>
+                    ))}
+                    
                 </Paper>
             ))}
         </Paper>
         <h1>Series</h1>
         <Paper elevation={3} style={paperStyle}>
-            {series.map(serie=>(
+            {series
+            .sort((a, b) => a.id-(b.id))
+            .map(serie=>(
                 <Paper elevation={6} style={{margin:"10px", padding:"15px",textAlign:"left"}} key={serie.id}>
                     Id:{serie.id} <br/>
                     Name:{serie.serieName}<br/>
-                    Description:{serie.description}<br/>
-                    <a href="https://www.kfdemoedigevrienden.be/" target='_blank'><img src={serie.cover} height={200}width={150} alt='foto'></img></a>
+                    <a href="https://www.kfdemoedigevrienden.be/" target='_blank'><img src={serie.cover} height={200}width={150} alt='foto'></img></a><br/>
                     <form className="bookmark">
                         
                         <Button className='addBookmark' variant="contained" value={serie.id} onClick={bookmarkClick}>Bookmark</Button>
                     </form>
+                    Description:{serie.description}<br/>
+                    Chapters:<br/>
+                    {serie.chapters
+                    .sort((a, b) => a.id-(b.id))
+                    .map((chapter) => (
+                        <a href={chapter.path} target='_blank'>
+                            {chapter.chapterName}<br/>
+                        </a>
+                    ))}
+
+                    
+                    
+                    
                 </Paper>
             ))}
         </Paper>
-        <h1>Chapters</h1>
+        {/* <h1>Chapters</h1>
         <Paper elevation={3} style={paperStyle}>
             {chapters.map(chapter=>(
                 <Paper elevation={6} style={{margin:"10px", padding:"15px",textAlign:"left"}} key={chapter.id}>
@@ -127,7 +149,7 @@ export default function User() {
                     <a href={chapter.path} target=''>{chapter.chapterName}<br/></a>
                 </Paper>
             ))}
-        </Paper>
+        </Paper> */}
     </Box>
     
   );

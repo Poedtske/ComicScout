@@ -36,10 +36,6 @@ public class User {
     )
     private Set<Serie> bookmarks= new HashSet<>();
 
-    public Set<Serie> getBookmarks() {
-        return bookmarks;
-    }
-
     public User(){}
 
     public User(String userName, String email) {
@@ -69,6 +65,10 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<Serie> getBookmarks() {
+        return bookmarks;
     }
 
     @Override

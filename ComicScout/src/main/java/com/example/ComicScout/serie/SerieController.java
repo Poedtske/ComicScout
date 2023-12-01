@@ -52,16 +52,4 @@ public class SerieController {
         serieService.updateSerie(serieId,name,description,cover);
     }
 
-/*@PutMapping(path ="{serieId}/Chapters/{chapterId}")
-public Serie addChapterToSerie(
-        @PathVariable Long serieId,
-        @PathVariable Long chapterId
-
-
-){
-    Serie serie= serieService.getSerie(serieId);
-    Chapter chapter= chapterService.getChapter(chapterId);
-    serie.addChapter(chapter);
-    return serieService.editSerie(serie);
-}*/
 }
