@@ -114,7 +114,9 @@ export default function User() {
         </Paper>
         <h1>Series</h1>
         <Paper elevation={3} style={paperStyle}>
-            {series.map(serie=>(
+            {series
+            .sort((a, b) => a.id-(b.id))
+            .map(serie=>(
                 <Paper elevation={6} style={{margin:"10px", padding:"15px",textAlign:"left"}} key={serie.id}>
                     Id:{serie.id} <br/>
                     Name:{serie.serieName}<br/>
