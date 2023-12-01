@@ -15,6 +15,9 @@ public interface SerieRepository extends JpaRepository<Serie, Long> {
     @Query("SELECT s FROM Serie s WHERE s.id= ?1")
     Serie findSerieById(long id);
 
+    @Query("SELECT s FROM Serie s WHERE s.name= ?1")
+    Optional<Serie> findSerieByName(String name);
+
     //List<Customer> findByLastName(String lastName);
 
     //Customer findById(long id);

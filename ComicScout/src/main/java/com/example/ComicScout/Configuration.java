@@ -33,28 +33,23 @@ public class Configuration {
             );
             Serie GoT= new Serie(
                     "Game of Thrones",
-                    "funy",
-                    "i1.sndcdn.com/artworks-W8KXhQeXZrv2YSJO-ctOyHA-t500x500.jpg"
+                    "people die",
+                    "https://i1.sndcdn.com/artworks-W8KXhQeXZrv2YSJO-ctOyHA-t500x500.jpg"
             );
             sRepository.saveAll(
                     List.of(GoT)
-            );
-            Chapter one= new Chapter(
-                    "1",
-                    "https://www.kfdemoedigevrienden.be/"
-            );
-            cRepository.saveAll(
-                    List.of(one)
             );
 
 
             Scraper flameComics=new Scraper("https://flamecomics.com/series/?page=1",cRepository,sRepository);
             try{
-                //flameComics.getSerie2(); tries to save on to the database!doesn't work!
+                //tries to save on to the database!doesn't work!
+                flameComics.getSerieRepository();
+                //flameComics.getSerieService();
 
                 //Just prints out all the chapters
-                flameComics.getSerie();
-            }catch (IOException e){
+                //flameComics.getSerie();
+            }catch (Exception e){
                 e.printStackTrace();
             }
 

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 //add business functionalities
 @Service
@@ -18,14 +19,15 @@ public class SerieService {
     public List<Serie>getSeries(){return serieRepository.findAll();}
 
     public Serie editSerie(Serie s) {
-        //Optional<User> userOptional= serieRepository.findUserByEmail(u.getEmail());
-        //if(userOptional.isPresent()){
-        //    throw new IllegalStateException("email taken");
-        //}
+
         return serieRepository.save(s);
     }
 
     public void addNewSerie (Serie s){
+        Optional<Serie> serieOptional= serieRepository.findSerieByName(s.getName());
+        if(serieOptional.isPresent()){
+            throw new IllegalStateException("serie is already present");
+        }
         serieRepository.save(s);
     }
 
@@ -33,13 +35,7 @@ public class SerieService {
         return serieRepository.findSerieById(serieId);
     }
 
-    public Serie editChapters(Serie s) {
-        //Optional<User> userOptional= serieRepository.findUserByEmail(u.getEmail());
-        //if(userOptional.isPresent()){
-        //    throw new IllegalStateException("email taken");
-        //}
-        return serieRepository.save(s);
-    }
+
 
     public void deleteSerie(Long serieId) {
         boolean exists= serieRepository.existsById(serieId);

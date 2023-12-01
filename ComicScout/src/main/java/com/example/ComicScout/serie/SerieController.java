@@ -27,7 +27,7 @@ public class SerieController {
 
 
 
-    @GetMapping
+    @GetMapping(path = "/getAll")
     public List<Serie>getSeries(){
         return serieService.getSeries();
     }

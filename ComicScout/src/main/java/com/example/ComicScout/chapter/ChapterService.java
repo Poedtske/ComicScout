@@ -22,10 +22,10 @@ public class ChapterService {
     public List<Chapter>getChapters(){return chapterRepository.findAll();}
 
     public void addNewChapter(Chapter c) {
-        //Optional<User> userOptional= chapterRepository.findUserByEmail(u.getEmail());
-        //if(userOptional.isPresent()){
-        //    throw new IllegalStateException("email taken");
-        //}
+        Optional<Chapter> chapterOptional= chapterRepository.findChapterByPath(c.getPath());
+        if(chapterOptional.isPresent()){
+            throw new IllegalStateException("chapter is already present");
+        }
         chapterRepository.save(c);
     }
 
@@ -45,21 +45,4 @@ public class ChapterService {
         return chapterRepository.save(chapter);
     }
 
-    //entity goes in to managed state, this makes it so we don't need to do sql syntax
-    /*@Transactional
-    public void updateChapter(Long chapterId, String name, String path) {
-        Chapter c = chapterRepository.findById(userId).orElseThrow(() -> new IllegalStateException("user with id " + userId + "does not exist"));
-
-        if (name != null && name.length() > 0 && !Objects.equals(c.getChapterName(), name)) {
-            c.setChapterName(name);
-        }
-
-        if (path != null && path.length() > 0 && !Objects.equals(c.getPath(), path)) {
-            //Optional<Chapter> chapterOptional = chapterRepository.findCapterByEmail(email);
-            if (chapterOptional.isPresent()) {
-                throw new IllegalStateException("chapter taken");
-            }
-            c.setEmail(email);
-        }
-    }*/
 }
