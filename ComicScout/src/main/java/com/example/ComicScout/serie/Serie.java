@@ -27,6 +27,15 @@ public class Serie {
     private String name;
     private String description;
     private String cover;
+    private String url;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     @JsonIgnore
     @ManyToMany(mappedBy = "bookmarks")
@@ -42,10 +51,11 @@ public class Serie {
 
     public Serie(){}
 
-    public Serie(String name, String description, String cover) {
+    public Serie(String name, String description, String cover,String url) {
         this.name = name;
         this.description = description;
         this.cover=cover;
+        this.url=url;
     }
 
     public Long getId() {
@@ -83,6 +93,7 @@ public class Serie {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", cover='" + cover + '\'' +
+                ", url="+url+'\''+
                 '}';
     }
 

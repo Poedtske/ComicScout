@@ -120,7 +120,7 @@ export default function User() {
                 <Paper elevation={6} style={{margin:"10px", padding:"15px",textAlign:"left"}} key={serie.id}>
                     Id:{serie.id} <br/>
                     Name:{serie.serieName}<br/>
-                    <a href="https://www.kfdemoedigevrienden.be/" target='_blank'><img src={serie.cover} height={200}width={150} alt='foto'></img></a><br/>
+                    <a href={serie.url} target='_blank'><img src={serie.cover} height={200}width={150} alt='foto'></img></a><br/>
                     <form className="bookmark">
                         
                         <Button className='addBookmark' variant="contained" value={serie.id} onClick={bookmarkClick}>Bookmark</Button>

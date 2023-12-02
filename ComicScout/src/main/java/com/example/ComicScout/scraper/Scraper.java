@@ -101,7 +101,7 @@ public class Scraper {
                     final String imgS= row.select("div.bs:nth-of-type("+i+") div a div.limit img").attr("src");
                     String chapter= "https://flamecomics.com/"+title+"-";
 
-                    Serie s= new Serie(title,"",imgS);
+                    Serie s= new Serie(title,"",imgS,"");
                     serieService.addNewSerie(s);
                     for (int y=1;y<=getNrOfChapters(ticker);y++){
                         Chapter c=new Chapter("Chapter "+y,chapter+"chapter-"+y+"/");
@@ -143,7 +143,7 @@ public class Scraper {
                     final String imgS= row.select("div.bs:nth-of-type("+i+") div a div.limit img").attr("src");
                     String chapter= "https://flamecomics.com/"+title+"-";
 
-                    Serie s= new Serie(title,"",imgS);
+                    Serie s= new Serie(title,"",imgS,"");
 
                     for (int y=1;y<=getNrOfChapters(ticker);y++){
                         Chapter c=new Chapter(s.getSerieName()+":Chapter"+y,chapter+"chapter-"+y+"/");
