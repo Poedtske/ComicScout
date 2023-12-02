@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Bean;
 import java.io.IOException;
 import java.util.List;
 
+
 @org.springframework.context.annotation.Configuration
 public class Configuration {
     @Bean
@@ -34,12 +35,12 @@ public class Configuration {
             Serie GoT= new Serie(
                     "Game of Thrones",
                     "people die",
-                    "https://i1.sndcdn.com/artworks-W8KXhQeXZrv2YSJO-ctOyHA-t500x500.jpg"
+                    "https://i1.sndcdn.com/artworks-W8KXhQeXZrv2YSJO-ctOyHA-t500x500.jpg",
+                    "dfg"
             );
             sRepository.saveAll(
                     List.of(GoT)
             );
-
 
             Scraper flameComics=new Scraper("https://flamecomics.com/series/?page=1",cRepository,sRepository);
             try{

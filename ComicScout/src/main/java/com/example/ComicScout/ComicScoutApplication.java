@@ -17,12 +17,25 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 
+import java.util.Arrays;
+
 @SpringBootApplication
 @RestController
 public class ComicScoutApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ComicScoutApplication.class, args);
+
+		/*
+		String links= "";
+		String[] array=links.split("https://",-1);
+		for (String link: array
+			 ) {
+			System.out.println("https://"+link);
+
+		}
+		*/
+
 	}
 
 
