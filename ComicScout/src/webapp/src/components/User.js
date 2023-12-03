@@ -130,6 +130,7 @@ export default function User() {
         };
         return getNumericPart(a.chapterName) - getNumericPart(b.chapterName);
     })
+    .reverse()
     .map((chapter) => (
         <a key={chapter.id} href={chapter.path} target='_blank'>
             {chapter.chapterName}<br />
