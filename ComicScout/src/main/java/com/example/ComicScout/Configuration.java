@@ -34,24 +34,31 @@ public class Configuration {
             Serie GoT= new Serie(
                     "Game of Thrones",
                     "people die",
-                    "https://i1.sndcdn.com/artworks-W8KXhQeXZrv2YSJO-ctOyHA-t500x500.jpg"
+                    "https://i1.sndcdn.com/artworks-W8KXhQeXZrv2YSJO-ctOyHA-t500x500.jpg",
+                    ""
             );
             sRepository.saveAll(
                     List.of(GoT)
             );
 
+            boolean page=true;
+            int i=1;
+            while(page){
+                Scraper flameComics=new Scraper("https://flamecomics.com/series/?page="+i,cRepository,sRepository);
+                System.out.println("page:"+i);
+                i++;
+                try{
+                    //tries to save on to the database!doesn't work!
+                    //flameComics.getSerieRepository();
+                    page=flameComics.getSerieService();
 
-            Scraper flameComics=new Scraper("https://flamecomics.com/series/?page=1",cRepository,sRepository);
-            try{
-                //tries to save on to the database!doesn't work!
-                //flameComics.getSerieRepository();
-                flameComics.getSerieService();
-
-                //Just prints out all the chapters
-                //flameComics.getSerie();
-            }catch (Exception e){
-                e.printStackTrace();
+                    //Just prints out all the chapters
+                    //flameComics.getSerie();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
             }
+
 
         };
     }

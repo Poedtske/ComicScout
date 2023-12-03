@@ -27,14 +27,15 @@ public class Serie {
     private String name;
     private String description;
     private String cover;
+    private String url;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "bookmarks")
-    private Set<User> userList=new HashSet<>();
+    private final Set<User> userList=new HashSet<>();
 
 
     @OneToMany(mappedBy = "serie")
-    private Set<Chapter> chapters=new HashSet<>();
+    private final Set<Chapter> chapters=new HashSet<>();
 
     public Set<Chapter> getChapters() {
         return chapters;
@@ -42,10 +43,11 @@ public class Serie {
 
     public Serie(){}
 
-    public Serie(String name, String description, String cover) {
+    public Serie(String name, String description, String cover,String url) {
         this.name = name;
         this.description = description;
         this.cover=cover;
+        this.url=url;
     }
 
     public Long getId() {
@@ -74,6 +76,14 @@ public class Serie {
 
     public void setCover(String cover) {
         this.cover = cover;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     @Override

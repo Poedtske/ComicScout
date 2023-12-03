@@ -12,12 +12,12 @@ import java.util.Arrays;
 public class WebScraper {
     public static void main(String[] args) {
         final String url="https://flamecomics.com/series/?page=1";
-
+        /*
         Scraper flameComics= new Scraper(url);
         try{
             flameComics.getSerie();
         }catch (IOException e){
             e.printStackTrace();
-        }
+        }*/
     }
 }

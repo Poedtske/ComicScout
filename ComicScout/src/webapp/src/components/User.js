@@ -59,18 +59,13 @@ export default function User() {
         fetch("http://localhost:8080/Series/getAll")
         .then(res=>res.json())
         .then((result)=>{
-            setSeries(result);
+            if(result){
+                setSeries(result);
+            }
+
             console.log(result);
         }
         )
-
-        // fetch("http://localhost:8080/Chapters/getAll")
-        // .then(res=>res.json())
-        // .then((result)=>{
-        //     setChapters(result);
-        //     console.log(result);
-        // }
-        // )
     },[])
 
     return (
@@ -120,7 +115,7 @@ export default function User() {
                 <Paper elevation={6} style={{margin:"10px", padding:"15px",textAlign:"left"}} key={serie.id}>
                     Id:{serie.id} <br/>
                     Name:{serie.serieName}<br/>
-                    <a href="https://www.kfdemoedigevrienden.be/" target='_blank'><img src={serie.cover} height={200}width={150} alt='foto'></img></a><br/>
+                    <a href={serie.url} target='_blank'><img src={serie.cover} height={200}width={150} alt='foto'></img></a><br/>
                     <form className="bookmark">
                         
                         <Button className='addBookmark' variant="contained" value={serie.id} onClick={bookmarkClick}>Bookmark</Button>
@@ -128,12 +123,18 @@ export default function User() {
                     Description:{serie.description}<br/>
                     Chapters:<br/>
                     {serie.chapters
-                    .sort((a, b) => a.id-(b.id))
-                    .map((chapter) => (
-                        <a href={chapter.path} target='_blank'>
-                            {chapter.chapterName}<br/>
-                        </a>
-                    ))}
+    .sort((a, b) => {
+        const getNumericPart = (str) => {
+            const matchResult = str.match(/\d+(\.\d+)?/);
+            return matchResult ? parseFloat(matchResult[0]) : 0;
+        };
+        return getNumericPart(a.chapterName) - getNumericPart(b.chapterName);
+    })
+    .map((chapter) => (
+        <a key={chapter.id} href={chapter.path} target='_blank'>
+            {chapter.chapterName}<br />
+        </a>
+    ))}
 
                     
                     

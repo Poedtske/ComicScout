@@ -59,7 +59,7 @@ public class ChapterController {
     ){
         Serie serie= serieService.getSerie(serieId);
         Chapter chapter= chapterService.getChapter(chapterId);
-        //chapter.addSerie(serie);
+        chapter.addSerie(serie);
         return chapterService.editChapter(chapter);
     }
 }

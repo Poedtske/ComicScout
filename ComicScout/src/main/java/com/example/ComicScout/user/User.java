@@ -34,7 +34,7 @@ public class User {
             joinColumns =@JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "serie_id")
     )
-    private Set<Serie> bookmarks= new HashSet<>();
+    private final Set<Serie> bookmarks= new HashSet<>();
 
     public User(){}
 
