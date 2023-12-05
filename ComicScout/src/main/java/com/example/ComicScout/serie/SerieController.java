@@ -5,6 +5,7 @@ import com.example.ComicScout.chapter.ChapterService;
 import com.example.ComicScout.user.User;
 import com.example.ComicScout.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,16 +33,19 @@ public class SerieController {
         return serieService.getSeries();
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping
     public void registerNewSerie(@RequestBody Serie s){
         serieService.addNewSerie(s);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping(path ="{serieId}")
     public void deleteSerie(@PathVariable("serieId") Long serieId){
         serieService.deleteSerie(serieId);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping(path ="{serieId}")
     public void updateSerie(
             @PathVariable("serieId") Long serieId,

@@ -3,6 +3,7 @@ package com.example.ComicScout.user;
 import com.example.ComicScout.serie.Serie;
 import com.example.ComicScout.serie.SerieService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,16 +25,18 @@ public class UserController {
         this.userService = userService;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping(path = "/getAll")
     public List<User>getUsers(){
         return userService.getUsers();
     }
 
-    @PostMapping
+    @PostMapping(path = "/register")
     public void registerNewUser(@RequestBody User u){
         userService.addNewUser(u);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping(path ="{userId}")
     public void deleteUser(@PathVariable("userId") Long userId){
         userService.deleteUser(userId);

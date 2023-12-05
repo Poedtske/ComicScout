@@ -1,6 +1,5 @@
 package com.example.ComicScout.user;
 
-import com.example.ComicScout.serie.Serie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,8 +48,8 @@ public class UserService {
     public void updateUser(Long userId, String name, String email) {
         User u = userRepository.findById(userId).orElseThrow(() -> new IllegalStateException("user with id " + userId + "does not exist"));
 
-        if (name != null && name.length() > 0 && !Objects.equals(u.getUserName(), name)) {
-            u.setUserName(name);
+        if (name != null && name.length() > 0 && !Objects.equals(u.getUsername(), name)) {
+            u.setUsername(name);
         }
 
         if (email != null && email.length() > 0 && !Objects.equals(u.getEmail(), email)) {

@@ -2,7 +2,6 @@ package com.example.ComicScout.user;
 
 
 import com.example.ComicScout.serie.Serie;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
@@ -25,8 +24,10 @@ public class User {
             generator = "user_sequence"
     )
     private Long id;
-    private String userName;
+    private String username;
     private String email;
+    private String password;
+    private String roles;
 
     @ManyToMany()
     @JoinTable(
@@ -38,9 +39,18 @@ public class User {
 
     public User(){}
 
-    public User(String userName, String email) {
-        this.userName = userName;
+    public User(String username, String email, String password, String roles) {
+        this.username = username;
         this.email = email;
+        this.password=password;
+        this.roles=roles;
+    }
+
+    public User(String username, String email, String password) {
+        this.username = username;
+        this.email = email;
+        this.password=password;
+        roles="ROLE_USER";
     }
 
     public Long getId() {
@@ -51,12 +61,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String userName) {
+        this.username = userName;
     }
 
     public String getEmail() {
@@ -71,14 +81,34 @@ public class User {
         return bookmarks;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String role) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", userName='" + userName + '\'' +
+                ", userName='" + username + '\'' +
                 ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + roles +
+                ", bookmarks=" + bookmarks +
                 '}';
     }
+
     public void addBookmark(Serie s) {
         bookmarks.add(s);
     }

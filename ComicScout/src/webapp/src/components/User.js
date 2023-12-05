@@ -17,18 +17,18 @@ export default function User() {
     // const[chapters, setChapters]=useState([])
     
     
-    const handleClick=(e)=>{
-        e.preventDefault();
-        const user={userName,email}
-        console.log(user);
-        fetch("http://localhost:8080/Users",{
-            method:"POST",
-            headers:{"Content-Type":"application/json"},
-            body:JSON.stringify(user)
-        }).then(()=>{
-            console.log("User is added");
-        })
-    }
+    // const handleClick=(e)=>{
+    //     e.preventDefault();
+    //     const user={userName,email}
+    //     console.log(user);
+    //     fetch("http://localhost:8080/Users",{
+    //         method:"POST",
+    //         headers:{"Content-Type":"application/json"},
+    //         body:JSON.stringify(user)
+    //     }).then(()=>{
+    //         console.log("User is added");
+    //     })
+    // }
 
     const bookmarkClick=(e)=>{
         e.preventDefault();
@@ -36,41 +36,36 @@ export default function User() {
         let serieId=e.target.value;
         
 
-        const ids={userId,serieId}
-        //console.log(userId+" "+serieId);
-        fetch(`http://localhost:8080/Users/${userId}/Series/${serieId}`,{
-            method:"PUT",
-            headers:{"Content-Type":"application/json"},
-            body:JSON.stringify(ids)
-        }).then(()=>{
-            console.log("Bookmarked");
-        })
+        // const ids={userId,serieId}
+        // //console.log(userId+" "+serieId);
+        // fetch(`http://localhost:8080/Users/${userId}/Series/${serieId}`,{
+        //     method:"PUT",
+        //     headers:{"Content-Type":"application/json"},
+        //     body:JSON.stringify(ids)
+        // }).then(()=>{
+        //     console.log("Bookmarked");
+        // })
     }
 
     useEffect(()=>{
-        fetch("http://localhost:8080/Users/getAll")
-        .then(res=>res.json())
-        .then((result)=>{
-            setUsers(result);
-            console.log(result);
-        }
-        )
+        // fetch("http://localhost:8080/Users/getAll")
+        // .then(res=>res.json())
+        // .then((result)=>{
+        //     setUsers(result);
+        //     console.log(result);
+        // }
+        // )
 
         fetch("http://localhost:8080/Series/getAll")
         .then(res=>res.json())
         .then((result)=>{
-            setSeries(result);
+            if(result){
+                setSeries(result);
+            }
+
             console.log(result);
         }
         )
-
-        // fetch("http://localhost:8080/Chapters/getAll")
-        // .then(res=>res.json())
-        // .then((result)=>{
-        //     setChapters(result);
-        //     console.log(result);
-        // }
-        // )
     },[])
 
     return (
@@ -83,7 +78,7 @@ export default function User() {
       autoComplete="off"
     >
         
-        <Paper elevation={3} style={paperStyle}>
+        {/* <Paper elevation={3} style={paperStyle}>
             <h1 style={{color:"blue"}}><u>Add User</u></h1>
             <form className="User">
                 <TextField className='addUser' id="userName" label="User Name" variant="outlined" fullWidth
@@ -111,7 +106,7 @@ export default function User() {
                     
                 </Paper>
             ))}
-        </Paper>
+        </Paper> */}
         <h1>Series</h1>
         <Paper elevation={3} style={paperStyle}>
             {series
@@ -128,12 +123,19 @@ export default function User() {
                     Description:{serie.description}<br/>
                     Chapters:<br/>
                     {serie.chapters
-                    .sort((a, b) => a.id-(b.id))
-                    .map((chapter) => (
-                        <a href={chapter.path} target='_blank'>
-                            {chapter.chapterName}<br/>
-                        </a>
-                    ))}
+    .sort((a, b) => {
+        const getNumericPart = (str) => {
+            const matchResult = str.match(/\d+(\.\d+)?/);
+            return matchResult ? parseFloat(matchResult[0]) : 0;
+        };
+        return getNumericPart(a.chapterName) - getNumericPart(b.chapterName);
+    })
+    .reverse()
+    .map((chapter) => (
+        <a key={chapter.id} href={chapter.path} target='_blank'>
+            {chapter.chapterName}<br />
+        </a>
+    ))}
 
                     
                     
